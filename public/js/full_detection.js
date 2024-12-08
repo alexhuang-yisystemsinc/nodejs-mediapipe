@@ -29,11 +29,11 @@ const { FaceLandmarker, FilesetResolver, DrawingUtils, GestureRecognizer, PoseLa
 const video = document.getElementById("webcam");
 const enableWebcamButton = document.getElementById("webcamButton");
 const canvasElement = document.getElementById("output_canvas");
-const canvasCtx = canvasElement ? canvasElement.getContext("2d") : null; // Ensure canvasCtx is not null
+const canvasCtx = canvasElement ? canvasElement.getContext("webgl") : null; // Ensure canvasCtx is not null
 const drawingUtils = canvasCtx ? new DrawingUtils(canvasCtx) : null; // Initialize DrawingUtils only if canvasCtx is not null
 const cyanColor = "#22dee5";
 const purpleColor = "#7696eb";
-const delegateType = "CPU";
+const delegateType = "GPU";
 let handGestureRunning = false;
 
 const customLandmarkConnections = [
@@ -201,7 +201,7 @@ async function predictWebcam() {
                 drawingUtils.drawConnectors(
                     landmarks,
                     FaceLandmarker.FACE_LANDMARKS_TESSELATION,
-                    { color: "#C0C0C070", lineWidth: 1 }
+                    { color: "#C0C0C070", lineWidth: 0.5 }
                 );
                 drawingUtils.drawConnectors(
                     landmarks,
